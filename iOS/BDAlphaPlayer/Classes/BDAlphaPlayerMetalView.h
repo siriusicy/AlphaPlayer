@@ -39,7 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  @prama configuration Params player needs.
 */
-- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration;
+//- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration;
+///cj新增
+- (void)sh_playWithFileName:(NSString *)fileName ;
 
 /**
  @brief Get total duration of currently displaying MP4.Duration is only available after [BDAlphaPlayerMetalView playWithMetalConfiguration:] method called.

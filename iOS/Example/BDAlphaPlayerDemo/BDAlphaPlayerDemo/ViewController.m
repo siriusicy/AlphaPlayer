@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+#import <Masonry/Masonry.h>
 
 #import <BDAlphaPlayer/BDAlphaPlayer.h>
 
@@ -35,41 +36,57 @@
     [self.stopBtn setTitle:@"stop" forState:UIControlStateNormal];
     [self.stopBtn addTarget:self action:@selector(stopBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.stopBtn];
+
 }
 
 - (void)startBtnClicked:(UIButton *)sender
 {
-    if (!self.metalView) {
-        self.metalView = [[BDAlphaPlayerMetalView alloc] initWithDelegate:self];
-        [self.view insertSubview:self.metalView atIndex:0];
-    }
+
     self.startBtn.hidden = YES;
     self.stopBtn.alpha = 0.3;
     
-    BDAlphaPlayerMetalConfiguration *configuration = [BDAlphaPlayerMetalConfiguration defaultConfiguration];
-    NSString *testResourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"TestResource"];
-    NSString *directory = [testResourcePath stringByAppendingPathComponent:@"heartbeats"];
-    configuration.directory = directory;
-    configuration.renderSuperViewFrame = self.view.frame;
-    configuration.orientation = BDAlphaPlayerOrientationPortrait;
+//    BDAlphaPlayerMetalConfiguration *configuration = [BDAlphaPlayerMetalConfiguration defaultConfiguration];
+//    NSString *testResourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"TestResource"];
+//    NSString *directory = [testResourcePath stringByAppendingPathComponent:@"heartbeats"];
+//    configuration.directory = directory;
+//    configuration.renderSuperViewFrame = self.view.frame;
+//    configuration.orientation = BDAlphaPlayerOrientationPortrait;
+////    configuration.orientation = BDAlphaPlayerOrientationLandscape;
+//
+//    [self.metalView playWithMetalConfiguration:configuration];
     
-    [self.metalView playWithMetalConfiguration:configuration];
+    [self.metalView sh_playWithFileName:@"2024"];
+    
 }
 
-- (void)stopBtnClicked:(UIButton *)sender
-{
+- (void)stopBtnClicked:(UIButton *)sender {
     [self.metalView stopWithFinishPlayingCallback];
-    [self.metalView removeFromSuperview];
-    self.metalView = nil;
+//    [self.metalView removeFromSuperview];
+//    self->_metalView = nil;
 }
 
-- (void)metalView:(BDAlphaPlayerMetalView *)metalView didFinishPlayingWithError:(NSError *)error
-{
+#pragma mark -  BDAlphaPlayerMetalViewDelegate
+- (void)metalView:(BDAlphaPlayerMetalView *)metalView didFinishPlayingWithError:(NSError *)error {
     if (error) {
         NSLog(@"%@", error.localizedDescription);
     }
     self.startBtn.hidden = NO;
     self.stopBtn.alpha = 1;
 }
+
+#pragma mark -  set/get
+
+- (BDAlphaPlayerMetalView *)metalView{
+    if (_metalView == nil) {
+        BDAlphaPlayerMetalView *view = [[BDAlphaPlayerMetalView alloc] initWithDelegate:self];
+        view.layer.borderColor = [UIColor redColor].CGColor;
+        view.layer.borderWidth = 1;
+        
+        _metalView = view;
+    }
+    return _metalView;
+}
+
+
 
 @end

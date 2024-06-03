@@ -56,20 +56,28 @@
 }
 
 #pragma mark - Public Method
-
-- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration
-{
-    NSAssert(!CGRectIsEmpty(configuration.renderSuperViewFrame), @"You need to initialize renderSuperViewFrame before playing");
-    NSError *error = nil;
-    self.renderSuperViewFrame = configuration.renderSuperViewFrame;
-    self.model = [BDAlphaPlayerResourceModel resourceModelFromDirectory:configuration.directory orientation:configuration.orientation error:&error];
-    if (error) {
-        [self didFinishPlayingWithError:error];
-        return;
-    }
+///cj新增
+- (void)sh_playWithFileName:(NSString *)fileName {
+    self.renderSuperViewFrame = self.superview.frame;
+    self.model = [BDAlphaPlayerResourceModel sh_resourceModelWithFileName:fileName];
     [self configRenderViewContentModeFromModel];
     [self play];
 }
+
+//- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration {
+//    NSAssert(!CGRectIsEmpty(configuration.renderSuperViewFrame), @"You need to initialize renderSuperViewFrame before playing");
+//    NSError *error = nil;
+//    self.renderSuperViewFrame = configuration.renderSuperViewFrame;
+//    self.model = [BDAlphaPlayerResourceModel resourceModelFromDirectory:configuration.directory 
+//                                                            orientation:configuration.orientation
+//                                                                  error:&error];
+//    if (error) {
+//        [self didFinishPlayingWithError:error];
+//        return;
+//    }
+//    [self configRenderViewContentModeFromModel];
+//    [self play];
+//}
 
 - (NSTimeInterval)totalDurationOfPlayingEffect
 {

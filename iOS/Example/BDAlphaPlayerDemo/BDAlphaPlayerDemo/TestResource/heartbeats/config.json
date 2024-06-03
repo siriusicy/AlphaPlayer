@@ -1,10 +1,10 @@
 {
 	"portrait": {
-        "align": 2,
-        "path": "heartbeats.mp4",
+        "align": 1,
+        "path": "JCB.mp4",
 	},
 	"landscape": {
-		"path": "heartbeats.mp4",
-		"align": 8
+		"path": "JCB.mp4",
+		"align": 1
 	}
 }

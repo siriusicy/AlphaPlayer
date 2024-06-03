@@ -13,58 +13,56 @@ NSString *const BDAlphaPlayerErrorDomain = @"BDAlphaPlayerErrorDomain";
 
 @implementation BDAlphaPlayerUtility
 
-+ (BDAlphaPlayerResourceModel *)createModelFromDictionary:(NSDictionary *)dictionary error:(NSError **)error
-{
-    BDAlphaPlayerResourceModel *model = [[BDAlphaPlayerResourceModel alloc] init];
-    
-    id portrait = dictionary[@"portrait"];
-    if (![portrait isKindOfClass:[NSDictionary class]]) {
-        *error = [self createErrorForDictionary:dictionary];
-    } else {
-        model.portraitResourceInfo = [self createResourceInfoFromDictionary:portrait error:error];
-    }
-    
-    id landscape = dictionary[@"landscape"];
-    if (![landscape isKindOfClass:[NSDictionary class]]) {
-        *error = [self createErrorForDictionary:dictionary];
-    } else {
-        model.landscapeResourceInfo = [self createResourceInfoFromDictionary:landscape error:error];
-    }
-    
-    return model;
-}
+//+ (BDAlphaPlayerResourceModel *)createModelFromDictionary:(NSDictionary *)dictionary error:(NSError **)error {
+//    BDAlphaPlayerResourceModel *model = [[BDAlphaPlayerResourceModel alloc] init];
+//    
+//    id portrait = dictionary[@"portrait"];
+//    if (![portrait isKindOfClass:[NSDictionary class]]) {
+//        *error = [self createErrorForDictionary:dictionary];
+//    } else {
+//        model.portraitResourceInfo = [self createResourceInfoFromDictionary:portrait error:error];
+//    }
+//    
+//    id landscape = dictionary[@"landscape"];
+//    if (![landscape isKindOfClass:[NSDictionary class]]) {
+//        *error = [self createErrorForDictionary:dictionary];
+//    } else {
+//        model.landscapeResourceInfo = [self createResourceInfoFromDictionary:landscape error:error];
+//    }
+//    
+//    return model;
+//}
 
-+ (BDAlphaPlayerResourceInfo *)createResourceInfoFromDictionary:(NSDictionary *)dictionary error:(NSError **)error
-{
-    BDAlphaPlayerResourceInfo *info = [[BDAlphaPlayerResourceInfo alloc] init];
-    
-    id align = dictionary[@"align"];
-    if ([align isKindOfClass:[NSString class]]) {
-        info.contentMode = [align description].integerValue;
-    } else if ([align isKindOfClass:[NSNumber class]]) {
-        info.contentMode = [(NSNumber *)align integerValue];
-    } else {
-        *error = [self createErrorForDictionary:dictionary];
-    }
-    
-    if (info.contentMode >= BDAlphaPlayerContentModeMax) {
-        *error = [self createErrorForDictionary:dictionary];
-    }
-    
-    id path = dictionary[@"path"];
-    if ([path isKindOfClass:[NSString class]]) {
-        info.resourceName = [path description];
-    } else {
-        *error = [self createErrorForDictionary:dictionary];
-    }
-    
-    return info;
-}
+//+ (BDAlphaPlayerResourceInfo *)createResourceInfoFromDictionary:(NSDictionary *)dictionary error:(NSError **)error {
+//    BDAlphaPlayerResourceInfo *info = [[BDAlphaPlayerResourceInfo alloc] init];
+//    
+//    id align = dictionary[@"align"];
+//    if ([align isKindOfClass:[NSString class]]) {
+//        info.contentMode = [align description].integerValue;
+//    } else if ([align isKindOfClass:[NSNumber class]]) {
+//        info.contentMode = [(NSNumber *)align integerValue];
+//    } else {
+//        *error = [self createErrorForDictionary:dictionary];
+//    }
+//    
+//    if (info.contentMode >= BDAlphaPlayerContentModeMax) {
+//        *error = [self createErrorForDictionary:dictionary];
+//    }
+//    
+//    id path = dictionary[@"path"];
+//    if ([path isKindOfClass:[NSString class]]) {
+//        info.resourceName = [path description];
+//    } else {
+//        *error = [self createErrorForDictionary:dictionary];
+//    }
+//    
+//    return info;
+//}
 
-+ (NSError *)createErrorForDictionary:(NSDictionary *)dictionary
-{
-    return [NSError errorWithDomain:BDAlphaPlayerErrorDomain code:BDAlphaPlayerErrorConfigResolve userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"config.json serialization fail at %@", dictionary]}];
-}
+//+ (NSError *)createErrorForDictionary:(NSDictionary *)dictionary
+//{
+//    return [NSError errorWithDomain:BDAlphaPlayerErrorDomain code:BDAlphaPlayerErrorConfigResolve userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"config.json serialization fail at %@", dictionary]}];
+//}
 
 + (CGRect)frameFromVideoSize:(CGSize)size renderSuperViewFrame:(CGRect)renderSuperViewFrame  resourceModel:(BDAlphaPlayerResourceModel *)resourceModel
 {

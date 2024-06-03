@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84D704632C0DA5A300DB125F /* 2024.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84D704622C0DA5A300DB125F /* 2024.mp4 */; };
 		D3D83A058E7F63F69BAD6253 /* Pods_BDAlphaPlayerDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECABF8FA319D8B3BF5335BF /* Pods_BDAlphaPlayerDemo.framework */; };
 		DF07A9CD2590D7BB00B83C25 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF07A9CC2590D7BB00B83C25 /* AppDelegate.m */; };
 		DF07A9D32590D7BC00B83C25 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF07A9D22590D7BC00B83C25 /* ViewController.m */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		14FADE93D0241FED4E56A984 /* Pods-BDAlphaPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BDAlphaPlayerDemo.release.xcconfig"; path = "Target Support Files/Pods-BDAlphaPlayerDemo/Pods-BDAlphaPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		84D704622C0DA5A300DB125F /* 2024.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2024.mp4; path = TestResource/heartbeats/2024.mp4; sourceTree = "<group>"; };
 		8ECABF8FA319D8B3BF5335BF /* Pods_BDAlphaPlayerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BDAlphaPlayerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF07A9C82590D7BB00B83C25 /* BDAlphaPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BDAlphaPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF07A9CB2590D7BB00B83C25 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				DF07A9CC2590D7BB00B83C25 /* AppDelegate.m */,
 				DF07A9D12590D7BB00B83C25 /* ViewController.h */,
 				DF07A9D22590D7BC00B83C25 /* ViewController.m */,
+				84D704622C0DA5A300DB125F /* 2024.mp4 */,
 				DF07A9D42590D7BC00B83C25 /* Main.storyboard */,
 				DF07A9D72590D7BE00B83C25 /* Assets.xcassets */,
 				DF07A9D92590D7BE00B83C25 /* LaunchScreen.storyboard */,
@@ -160,6 +163,7 @@
 				DF07A9DB2590D7BE00B83C25 /* LaunchScreen.storyboard in Resources */,
 				DF07A9D82590D7BE00B83C25 /* Assets.xcassets in Resources */,
 				DF07A9D62590D7BC00B83C25 /* Main.storyboard in Resources */,
+				84D704632C0DA5A300DB125F /* 2024.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +295,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -344,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -359,8 +363,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PLC68SB8UG;
 				INFOPLIST_FILE = BDAlphaPlayerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,8 +383,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PLC68SB8UG;
 				INFOPLIST_FILE = BDAlphaPlayerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

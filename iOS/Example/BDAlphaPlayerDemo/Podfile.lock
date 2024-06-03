@@ -1,16 +1,23 @@
 PODS:
-  - BDAlphaPlayer (1.1.0)
+  - BDAlphaPlayer (1.2.2)
+  - Masonry (1.1.0)
 
 DEPENDENCIES:
   - BDAlphaPlayer (from `../../../`)
+  - Masonry
+
+SPEC REPOS:
+  trunk:
+    - Masonry
 
 EXTERNAL SOURCES:
   BDAlphaPlayer:
     :path: "../../../"
 
 SPEC CHECKSUMS:
-  BDAlphaPlayer: 6ec0535dbbac6b089e94acb5559dcdf77dd1d5a8
+  BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
-PODFILE CHECKSUM: a2a7c83a00e25dc193359c91e412457a63e7fbad
+PODFILE CHECKSUM: b48c102380e76e071eff303b1a40328e2b2135d4
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.13.0
