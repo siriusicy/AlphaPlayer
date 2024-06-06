@@ -23,7 +23,7 @@
     }
     
     BDAlphaPlayerResourceInfo *infoModel = [[BDAlphaPlayerResourceInfo alloc] init];
-    infoModel.contentMode = BDAlphaPlayerContentModeFitRight;
+    infoModel.contentMode = BDAlphaPlayerContentModeScaleAspectFit;
     infoModel.resourceName = fileName;
     infoModel.resourceFilePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"mp4"];
     infoModel.resourceFileURL = [NSURL fileURLWithPath:infoModel.resourceFilePath ? : @""];
@@ -34,5 +34,21 @@
     model.currentOrientationResourceInfo = infoModel;
     return model;
 }
+
++ (instancetype)sh_resourceModelWithLocalPath:(NSString *)localPath {
+    
+    BDAlphaPlayerResourceInfo *infoModel = [[BDAlphaPlayerResourceInfo alloc] init];
+    infoModel.contentMode = BDAlphaPlayerContentModeScaleAspectFit;
+    infoModel.resourceName = localPath ? : @"未命名";
+    infoModel.resourceFilePath = localPath ? : @"";
+    infoModel.resourceFileURL = [NSURL fileURLWithPath:localPath ? : @""];
+    
+    //
+    BDAlphaPlayerResourceModel *model = [[self alloc] init];
+    model.currentOrientation = BDAlphaPlayerOrientationPortrait;
+    model.currentOrientationResourceInfo = infoModel;
+    return model;
+}
+
 
 @end

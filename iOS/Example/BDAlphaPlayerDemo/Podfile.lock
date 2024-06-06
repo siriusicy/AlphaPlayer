@@ -1,5 +1,21 @@
 PODS:
-  - BDAlphaPlayer (1.2.2)
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - BDAlphaPlayer (1.2.2):
+    - AFNetworking
   - Masonry (1.1.0)
 
 DEPENDENCIES:
@@ -8,6 +24,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AFNetworking
     - Masonry
 
 EXTERNAL SOURCES:
@@ -15,7 +32,8 @@ EXTERNAL SOURCES:
     :path: "../../../"
 
 SPEC CHECKSUMS:
-  BDAlphaPlayer: 3b31756760ea37b9710bfb36a18b431ad05f6da7
+  AFNetworking: 3bd23d814e976cd148d7d44c3ab78017b744cd58
+  BDAlphaPlayer: addfe23293714ca272d93f4d0fe4eef1ff20376e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: b48c102380e76e071eff303b1a40328e2b2135d4

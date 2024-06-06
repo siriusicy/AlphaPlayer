@@ -42,6 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration;
 ///cj新增
 - (void)sh_playWithFileName:(NSString *)fileName ;
+///cj新增 加载网络mp4
+- (void)sh_playWithUrl:(NSString *)urlString ;
+
+
 
 /**
  @brief Get total duration of currently displaying MP4.Duration is only available after [BDAlphaPlayerMetalView playWithMetalConfiguration:] method called.

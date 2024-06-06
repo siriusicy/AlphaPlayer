@@ -13,6 +13,7 @@
 
 #import <MetalKit/MetalKit.h>
 #import <pthread.h>
+#import "BDAlphaPlayerOnlineTool.h"
 
 @interface BDAlphaPlayerMetalView ()
 
@@ -32,6 +33,10 @@
 @end
 
 @implementation BDAlphaPlayerMetalView
+
+- (void)dealloc {
+    NSLog(@"-=-=-= dealloc %@", NSStringFromClass(self.class));
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -62,6 +67,23 @@
     self.model = [BDAlphaPlayerResourceModel sh_resourceModelWithFileName:fileName];
     [self configRenderViewContentModeFromModel];
     [self play];
+}
+
+///cj新增 加载网络mp4
+- (void)sh_playWithUrl:(NSString *)urlString {
+    __weak typeof(self) weakSelf = self;
+    [BDAlphaPlayerOnlineTool sh_loadOnlineMp4WithUrl:urlString complete:^(NSString * _Nonnull localPath, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"-=-=-= 播放失败 : %@", error.localizedDescription);
+            return;
+        }
+        if (localPath.length > 0) {
+            weakSelf.renderSuperViewFrame = weakSelf.superview.frame;
+            weakSelf.model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
+            [weakSelf configRenderViewContentModeFromModel];
+            [weakSelf play];
+        }
+    }];
 }
 
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration {

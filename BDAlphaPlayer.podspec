@@ -24,4 +24,6 @@ Pod::Spec.new do |spec|
 
   spec.frameworks = 'UIKit','CoreVideo'
 
+  spec.dependency 'AFNetworking'
+  
 end

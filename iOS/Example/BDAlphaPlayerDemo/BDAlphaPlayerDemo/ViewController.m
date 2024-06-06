@@ -57,6 +57,8 @@
     
     [self.metalView sh_playWithFileName:@"2024"];
     
+//    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+    
 }
 
 - (void)stopBtnClicked:(UIButton *)sender {

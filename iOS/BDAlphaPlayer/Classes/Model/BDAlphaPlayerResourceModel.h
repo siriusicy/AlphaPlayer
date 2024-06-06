@@ -22,6 +22,6 @@
 
 ///cj新增
 + (instancetype)sh_resourceModelWithFileName:(NSString *)fileName;
-
++ (instancetype)sh_resourceModelWithLocalPath:(NSString *)localPath;
 
 @end
