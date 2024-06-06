@@ -24,7 +24,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor blackColor];
     
+    //
+    [self.view addSubview:self.metalView];
+    [self.metalView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.centerX.mas_equalTo(0);
+        make.height.mas_equalTo(self.metalView.mas_width).multipliedBy(988/450.0);
+    }];
+    //
     self.startBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 60, 60)];
     self.startBtn.backgroundColor = [UIColor orangeColor];
     [self.startBtn setTitle:@"start" forState:UIControlStateNormal];
@@ -37,6 +47,8 @@
     [self.stopBtn addTarget:self action:@selector(stopBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.stopBtn];
 
+
+    
 }
 
 - (void)startBtnClicked:(UIButton *)sender
@@ -55,9 +67,9 @@
 //
 //    [self.metalView playWithMetalConfiguration:configuration];
     
-    [self.metalView sh_playWithFileName:@"2024"];
+//    [self.metalView sh_playWithFileName:@"2024"];
     
-//    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
     
 }
 

@@ -39,10 +39,9 @@
     
     BDAlphaPlayerResourceInfo *infoModel = [[BDAlphaPlayerResourceInfo alloc] init];
     infoModel.contentMode = BDAlphaPlayerContentModeScaleAspectFit;
-    infoModel.resourceName = localPath ? : @"未命名";
     infoModel.resourceFilePath = localPath ? : @"";
     infoModel.resourceFileURL = [NSURL fileURLWithPath:localPath ? : @""];
-    
+    infoModel.resourceName = [infoModel.resourceFileURL lastPathComponent];
     //
     BDAlphaPlayerResourceModel *model = [[self alloc] init];
     model.currentOrientation = BDAlphaPlayerOrientationPortrait;
