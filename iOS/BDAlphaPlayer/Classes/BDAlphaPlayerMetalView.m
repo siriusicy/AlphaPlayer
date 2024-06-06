@@ -62,13 +62,12 @@
 
 #pragma mark - Public Method
 ///cj新增
-- (void)sh_playWithFileName:(NSString *)fileName {
+- (void)sh_playWithLocalPath:(NSString *)localPath {
     self.renderSuperViewFrame = self.superview.frame;
-    self.model = [BDAlphaPlayerResourceModel sh_resourceModelWithFileName:fileName];
+    self.model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
     [self configRenderViewContentModeFromModel];
     [self play];
 }
-
 ///cj新增 加载网络mp4
 - (void)sh_playWithUrl:(NSString *)urlString {
     __weak typeof(self) weakSelf = self;
@@ -78,10 +77,7 @@
             return;
         }
         if (localPath.length > 0) {
-            weakSelf.renderSuperViewFrame = weakSelf.superview.frame;
-            weakSelf.model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
-            [weakSelf configRenderViewContentModeFromModel];
-            [weakSelf play];
+            [weakSelf sh_playWithLocalPath:localPath];
         }
     }];
 }

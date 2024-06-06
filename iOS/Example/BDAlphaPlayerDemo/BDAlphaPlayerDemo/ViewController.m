@@ -67,10 +67,12 @@
 //
 //    [self.metalView playWithMetalConfiguration:configuration];
     
-//    [self.metalView sh_playWithFileName:@"2024"];
-    
-    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
-    
+#pragma mark -  1.加载网络地址
+//    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+#pragma mark -  2.加载本地
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"2024" ofType:@"mp4"];
+    [self.metalView sh_playWithLocalPath:path];
+
 }
 
 - (void)stopBtnClicked:(UIButton *)sender {
