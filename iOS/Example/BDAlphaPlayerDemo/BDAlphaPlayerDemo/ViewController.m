@@ -67,11 +67,30 @@
 //
 //    [self.metalView playWithMetalConfiguration:configuration];
     
+    #pragma mark -  模拟多线程调用
+    for (int i = 0; i<3; i++) {
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
 #pragma mark -  1.加载网络地址
-//    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+            [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+            
+//            {
+//                NSString *path = [[NSBundle mainBundle] pathForResource:@"heartbeats" ofType:@"mp4"];
+//                [self.metalView sh_playWithLocalPath:path];
+//            }
 #pragma mark -  2.加载本地
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"2024" ofType:@"mp4"];
-    [self.metalView sh_playWithLocalPath:path];
+            {
+                NSString *path = [[NSBundle mainBundle] pathForResource:@"2024" ofType:@"mp4"];
+                [self.metalView sh_playWithLocalPath:path];
+            }
+        });
+        
+    }
+    
+//#pragma mark -  1.加载网络地址
+////    [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
+//#pragma mark -  2.加载本地
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"2024" ofType:@"mp4"];
+//    [self.metalView sh_playWithLocalPath:path];
 
 }
 

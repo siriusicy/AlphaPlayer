@@ -84,6 +84,10 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)frameCallBack:(NSTimeInterval)duration;
 
+///完成所有播放任务
+- (void)metalViewDidFinishAll:(BDAlphaPlayerMetalView *)metalView ;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

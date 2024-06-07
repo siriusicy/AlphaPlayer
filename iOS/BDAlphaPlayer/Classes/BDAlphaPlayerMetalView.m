@@ -15,8 +15,21 @@
 #import <pthread.h>
 #import "BDAlphaPlayerOnlineTool.h"
 
+
+#ifndef bd_dispatch_queue_async_safe
+#define bd_dispatch_queue_async_safe(queue, block)\
+    if (dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL) == dispatch_queue_get_label(queue)) {\
+        block();\
+    } else {\
+        dispatch_async(queue, block);\
+    }
+#endif
+
 @interface BDAlphaPlayerMetalView ()
 
+@property (nonatomic, strong) NSMutableArray<BDAlphaPlayerResourceModel *> *taskArray;
+@property (nonatomic, strong) dispatch_queue_t queue;
+//
 @property (nonatomic, strong, readwrite) BDAlphaPlayerResourceModel *model;
 @property (nonatomic, assign, readwrite) BDAlphaPlayerPlayState state;
 
@@ -56,6 +69,8 @@
         
         self.delegate = delegate;
         [self setupMetal];
+        
+        self.queue = dispatch_queue_create("MP4Lock", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -63,10 +78,13 @@
 #pragma mark - Public Method
 ///cj新增
 - (void)sh_playWithLocalPath:(NSString *)localPath {
-    self.renderSuperViewFrame = self.superview.frame;
-    self.model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
-    [self configRenderViewContentModeFromModel];
-    [self play];
+    
+    BDAlphaPlayerResourceModel *model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
+    dispatch_barrier_sync(self.queue, ^{ ///< 写操作 加锁
+        [self.taskArray addObject:model];
+    });
+    [self sh_playNext];
+    
 }
 ///cj新增 加载网络mp4
 - (void)sh_playWithUrl:(NSString *)urlString {
@@ -80,6 +98,27 @@
             [weakSelf sh_playWithLocalPath:localPath];
         }
     }];
+}
+
+- (void)sh_playNext {
+
+    if (self.state == BDAlphaPlayerPlayStatePlay) {
+        return;
+    }
+    __block BDAlphaPlayerResourceModel *nextModel = nil;
+    dispatch_sync(self.queue, ^{
+        nextModel = self.taskArray.firstObject;
+    });
+    if (nextModel == nil) {
+        return;
+    }
+    //
+    bd_dispatch_queue_async_safe(dispatch_get_main_queue(), ^{
+        self.renderSuperViewFrame = self.superview.frame;
+        self.model = nextModel;
+        [self configRenderViewContentModeFromModel];
+        [self play];
+    });
 }
 
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration {
@@ -133,6 +172,22 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(metalView:didFinishPlayingWithError:)]) {
         [self.delegate metalView:self didFinishPlayingWithError:error];
     }
+    
+    ///cj_add
+    dispatch_barrier_sync(self.queue, ^{ ///< 写操作 加锁
+        if ([self.taskArray containsObject:self.model]) {
+            [self.taskArray removeObject:self.model];
+        }
+    });
+    if (self.taskArray.count > 0) {
+        [self sh_playNext];
+    } else {
+        if (self.delegate &&
+            [self.delegate respondsToSelector:@selector(metalViewDidFinishAll:)]) {
+            [self.delegate metalViewDidFinishAll:self];
+        }
+    }
+    
 }
 
 #pragma mark Player
@@ -228,5 +283,17 @@
         self.hasDestroyed = NO;
     }
 }
+
+#pragma mark -  set/get
+
+- (NSMutableArray<BDAlphaPlayerResourceModel *> *)taskArray {
+    if (_taskArray == nil) {
+        NSMutableArray *muArr = [NSMutableArray array];
+        
+        _taskArray = muArr;
+    }
+    return _taskArray;
+}
+
 
 @end
