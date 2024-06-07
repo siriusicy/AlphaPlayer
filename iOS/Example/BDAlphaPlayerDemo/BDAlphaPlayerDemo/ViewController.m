@@ -28,13 +28,6 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     //
-    [self.view addSubview:self.metalView];
-    [self.metalView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.centerX.mas_equalTo(0);
-        make.height.mas_equalTo(self.metalView.mas_width).multipliedBy(988/450.0);
-    }];
-    //
     self.startBtn = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 60, 60)];
     self.startBtn.backgroundColor = [UIColor orangeColor];
     [self.startBtn setTitle:@"start" forState:UIControlStateNormal];
@@ -53,6 +46,14 @@
 
 - (void)startBtnClicked:(UIButton *)sender
 {
+    
+    //
+    [self.view insertSubview:self.metalView atIndex:0];
+    [self.metalView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.centerX.mas_equalTo(0);
+        make.height.mas_equalTo(self.metalView.mas_width).multipliedBy(988/450.0);
+    }];
 
     self.startBtn.hidden = YES;
     self.stopBtn.alpha = 0.3;
@@ -68,7 +69,7 @@
 //    [self.metalView playWithMetalConfiguration:configuration];
     
     #pragma mark -  模拟多线程调用
-    for (int i = 0; i<3; i++) {
+    for (int i = 0; i<2; i++) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
 #pragma mark -  1.加载网络地址
             [self.metalView sh_playWithUrl:@"http://static.dhsf.996box.com/box/gift_animation/guard_silver_450_974.mp4"];
@@ -107,6 +108,11 @@
     }
     self.startBtn.hidden = NO;
     self.stopBtn.alpha = 1;
+}
+///完成所有播放任务
+- (void)sh_metalViewDidFinishAll:(BDAlphaPlayerMetalView *)metalView {
+    [self.metalView removeFromSuperview];
+    self->_metalView = nil;
 }
 
 #pragma mark -  set/get

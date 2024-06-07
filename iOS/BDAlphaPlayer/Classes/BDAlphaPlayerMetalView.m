@@ -183,8 +183,8 @@
         [self sh_playNext];
     } else {
         if (self.delegate &&
-            [self.delegate respondsToSelector:@selector(metalViewDidFinishAll:)]) {
-            [self.delegate metalViewDidFinishAll:self];
+            [self.delegate respondsToSelector:@selector(sh_metalViewDidFinishAll:)]) {
+            [self.delegate sh_metalViewDidFinishAll:self];
         }
     }
     
