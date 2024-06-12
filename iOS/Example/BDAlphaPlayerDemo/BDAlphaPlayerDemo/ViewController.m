@@ -103,14 +103,21 @@
 
 #pragma mark -  BDAlphaPlayerMetalViewDelegate
 - (void)metalView:(BDAlphaPlayerMetalView *)metalView didFinishPlayingWithError:(NSError *)error {
+    NSLog(@"-=-=-= 完成单个任务");
     if (error) {
         NSLog(@"%@", error.localizedDescription);
     }
     self.startBtn.hidden = NO;
     self.stopBtn.alpha = 1;
 }
+
+- (void)sh_metalViewWillStartPlay:(BDAlphaPlayerMetalView *)metalView {
+    NSLog(@"-=-=-= 将要开始播放");
+}
+
 ///完成所有播放任务
 - (void)sh_metalViewDidFinishAll:(BDAlphaPlayerMetalView *)metalView {
+    NSLog(@"-=-=-= 完成所有播放任务");
     [self.metalView removeFromSuperview];
     self->_metalView = nil;
 }

@@ -101,7 +101,13 @@
 }
 
 - (void)sh_playNext {
+    bd_dispatch_queue_async_safe(dispatch_get_main_queue(), ^{
+        [self sh_doPlayNext];
+    });
+}
 
+- (void)sh_doPlayNext {
+    
     if (self.state == BDAlphaPlayerPlayStatePlay) {
         return;
     }
@@ -113,12 +119,11 @@
         return;
     }
     //
-    bd_dispatch_queue_async_safe(dispatch_get_main_queue(), ^{
-        self.renderSuperViewFrame = self.superview.frame;
-        self.model = nextModel;
-        [self configRenderViewContentModeFromModel];
-        [self play];
-    });
+    self.renderSuperViewFrame = self.superview.frame;
+    self.model = nextModel;
+    [self configRenderViewContentModeFromModel];
+    [self play];
+    
 }
 
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration {
@@ -217,6 +222,13 @@
         [self didFinishPlayingWithError:finishError];
         return;
     }
+    
+    ///cj 将要开始播放
+    if (self.delegate && 
+        [self.delegate respondsToSelector:@selector(sh_metalViewWillStartPlay:)]) {
+        [self.delegate sh_metalViewWillStartPlay:self];
+    }
+    
     self.state = BDAlphaPlayerPlayStatePlay;
     __weak __typeof(self) weakSelf = self;
     [self renderOutput:output resourceModel:self.model completion:^{

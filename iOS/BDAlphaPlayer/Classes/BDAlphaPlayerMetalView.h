@@ -86,6 +86,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///完成所有播放任务
 - (void)sh_metalViewDidFinishAll:(BDAlphaPlayerMetalView *)metalView ;
+///将要开始播放
+- (void)sh_metalViewWillStartPlay:(BDAlphaPlayerMetalView *)metalView ;
+
 
 
 @end
