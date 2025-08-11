@@ -78,16 +78,30 @@
 #pragma mark - Public Method
 ///cj新增
 - (void)sh_playWithLocalPath:(NSString *)localPath {
-    
+    [self sh_playWithLocalPath:localPath isPriorityHigh:NO];
+}
+
+- (void)sh_playWithLocalPath:(NSString *)localPath isPriorityHigh:(BOOL)isPriorityHigh{
+
     BDAlphaPlayerResourceModel *model = [BDAlphaPlayerResourceModel sh_resourceModelWithLocalPath:localPath];
+    model.isPriorityHigh = isPriorityHigh;
     dispatch_barrier_sync(self.queue, ^{ ///< 写操作 加锁
-        [self.taskArray addObject:model];
+        if (isPriorityHigh) {
+            // TODO:-  临时处理,永远插入到0,后续可以插入到上一个高优先级model后面
+            [self.taskArray insertObject:model atIndex:0];
+        } else {
+            [self.taskArray addObject:model];
+        }
     });
     [self sh_playNext];
     
 }
 ///cj新增 加载网络mp4
 - (void)sh_playWithUrl:(NSString *)urlString {
+    [self sh_playWithUrl:urlString isPriorityHigh:NO];
+}
+
+- (void)sh_playWithUrl:(NSString *)urlString isPriorityHigh:(BOOL)isPriorityHigh {
     __weak typeof(self) weakSelf = self;
     [BDAlphaPlayerOnlineTool sh_loadOnlineMp4WithUrl:urlString complete:^(NSString * _Nonnull localPath, NSError * _Nullable error) {
         if (error) {
@@ -95,7 +109,7 @@
             return;
         }
         if (localPath.length > 0) {
-            [weakSelf sh_playWithLocalPath:localPath];
+            [weakSelf sh_playWithLocalPath:localPath isPriorityHigh:isPriorityHigh];
         }
     }];
 }
