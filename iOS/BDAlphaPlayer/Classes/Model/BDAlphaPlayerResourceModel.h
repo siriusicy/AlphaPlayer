@@ -19,6 +19,8 @@
 /** The resource model for current orientation. */
 @property (nonatomic, strong) BDAlphaPlayerResourceInfo *currentOrientationResourceInfo;
 
+///cj新增 优先级 
+@property (nonatomic, assign) BOOL isPriorityHigh;
 ///cj新增
 + (instancetype)sh_resourceModelWithLocalPath:(NSString *)localPath;
 
