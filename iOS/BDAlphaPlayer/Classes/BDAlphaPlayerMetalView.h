@@ -42,8 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration;
 ///cj新增
 - (void)sh_playWithLocalPath:(NSString *)localPath ;
+///isPriorityHigh:高优先级
+- (void)sh_playWithLocalPath:(NSString *)localPath isPriorityHigh:(BOOL)isPriorityHigh;
+
 ///cj新增 加载网络mp4
 - (void)sh_playWithUrl:(NSString *)urlString ;
+///isPriorityHigh:高优先级
+- (void)sh_playWithUrl:(NSString *)urlString isPriorityHigh:(BOOL)isPriorityHigh;
 
 
 
