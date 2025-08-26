@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
  @prama configuration Params player needs.
 */
 //- (void)playWithMetalConfiguration:(BDAlphaPlayerMetalConfiguration *)configuration;
+
+///cj新增 是否播放声音 默认NO
+@property (nonatomic, assign) BOOL shouldPlayAudio;
 ///cj新增
 - (void)sh_playWithLocalPath:(NSString *)localPath ;
 ///isPriorityHigh:高优先级
